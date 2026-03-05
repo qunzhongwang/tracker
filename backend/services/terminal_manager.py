@@ -75,7 +75,12 @@ class TerminalManager:
 
         pid, fd = pty.fork()
         if pid == 0:
-            # Child process
+            # Child process — start in user's home directory
+            home = os.path.expanduser("~")
+            try:
+                os.chdir(home)
+            except OSError:
+                pass
             os.execvp(shell, [shell, "-l"])
         else:
             # Parent

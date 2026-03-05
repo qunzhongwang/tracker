@@ -54,7 +54,9 @@ function FileBrowser({ onSelect }: { onSelect: (path: string) => void }) {
         ))}
         {(!items || items.length === 0) && (
           <p className="text-xs text-stone-400 py-4 text-center">
-            {currentPath ? 'Empty directory' : 'No watch paths configured'}
+            {currentPath ? 'Empty directory' : (
+              <>No watch paths configured. <a href="/settings" className="text-accent hover:underline">Add paths in Settings</a></>
+            )}
           </p>
         )}
       </div>

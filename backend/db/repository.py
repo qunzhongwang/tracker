@@ -307,6 +307,52 @@ async def delete_preset(db: aiosqlite.Connection, preset_id: int) -> None:
     await db.commit()
 
 
+# --- Local Calendar Events ---
+
+async def get_local_events(
+    db: aiosqlite.Connection,
+    time_min: str | None = None,
+    time_max: str | None = None,
+    limit: int = 100,
+) -> list[dict]:
+    where_parts = []
+    params: list = []
+    if time_min:
+        where_parts.append("start_time >= ?")
+        params.append(time_min)
+    if time_max:
+        where_parts.append("start_time <= ?")
+        params.append(time_max)
+    where = ("WHERE " + " AND ".join(where_parts)) if where_parts else ""
+    rows = await db.execute_fetchall(
+        f"SELECT * FROM local_events {where} ORDER BY start_time ASC LIMIT ?",
+        params + [limit],
+    )
+    return [dict(r) for r in rows]
+
+
+async def create_local_event(db: aiosqlite.Connection, event: dict) -> int:
+    cursor = await db.execute(
+        """INSERT INTO local_events (summary, description, start_time, end_time, location, all_day)
+        VALUES (?, ?, ?, ?, ?, ?)""",
+        (
+            event["summary"],
+            event.get("description", ""),
+            event["start"],
+            event["end"],
+            event.get("location", ""),
+            1 if event.get("all_day") else 0,
+        ),
+    )
+    await db.commit()
+    return cursor.lastrowid
+
+
+async def delete_local_event(db: aiosqlite.Connection, event_id: int) -> None:
+    await db.execute("DELETE FROM local_events WHERE id = ?", (event_id,))
+    await db.commit()
+
+
 # --- Settings KV ---
 
 async def get_setting(db: aiosqlite.Connection, key: str) -> str | None:

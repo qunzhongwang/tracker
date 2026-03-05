@@ -110,7 +110,7 @@ export default function CalendarPage() {
             ))
           ) : (
             <div className="bg-white rounded-lg border border-stone-200 flex items-center justify-center h-48 text-stone-400 text-sm">
-              {data ? 'No upcoming events' : 'Connect Google Calendar in Settings'}
+              No upcoming events. Create one to get started.
             </div>
           )}
         </div>

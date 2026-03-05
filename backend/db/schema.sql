@@ -97,3 +97,14 @@ CREATE TABLE IF NOT EXISTS settings (
     value TEXT DEFAULT '',
     updated_at TEXT DEFAULT (datetime('now'))
 );
+
+CREATE TABLE IF NOT EXISTS local_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    summary TEXT NOT NULL,
+    description TEXT DEFAULT '',
+    start_time TEXT NOT NULL,
+    end_time TEXT NOT NULL,
+    location TEXT DEFAULT '',
+    all_day INTEGER DEFAULT 0,
+    created_at TEXT DEFAULT (datetime('now'))
+);

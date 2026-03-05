@@ -10,8 +10,10 @@ slurm:
 
 logs:
   watch_paths:
-    - "/home/$USER/slurm_logs"
-    - "/scratch/gpfs/$GROUP/$USER"
+    - "/home/$USER/slurm/output"
+    - "/home/$USER/slurm/error"
+    # Add your scratch directory, e.g.:
+    # - "/scratch/gpfs/YOUR_GROUP/$USER"
 
 terminal:
   max_terminals: 5
