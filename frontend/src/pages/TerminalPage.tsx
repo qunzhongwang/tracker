@@ -25,18 +25,18 @@ function TerminalView({ session }: { session: TerminalSession }) {
         fontSize: 14,
         fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
         theme: {
-          background: '#0a0e17',
-          foreground: '#e5e7eb',
-          cursor: '#6366f1',
-          selectionBackground: '#6366f140',
-          black: '#1a2235',
+          background: '#1c1917',
+          foreground: '#e7e5e4',
+          cursor: '#a8a29e',
+          selectionBackground: '#44403c',
+          black: '#1c1917',
           red: '#ef4444',
           green: '#22c55e',
-          yellow: '#f59e0b',
-          blue: '#3b82f6',
-          magenta: '#a855f7',
-          cyan: '#06b6d4',
-          white: '#e5e7eb',
+          yellow: '#fbbf24',
+          blue: '#60a5fa',
+          magenta: '#c084fc',
+          cyan: '#22d3ee',
+          white: '#e7e5e4',
         },
       })
 
@@ -143,40 +143,40 @@ export default function TerminalPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-bold text-white">Terminal</h1>
+      <h1 className="text-lg font-semibold text-stone-900">Terminal</h1>
 
-      <div className="bg-surface-1 rounded-xl border border-white/5 overflow-hidden">
+      <div className="bg-white rounded-lg border border-stone-200 overflow-hidden">
         {/* Tab bar */}
-        <div className="flex items-center bg-surface-2 border-b border-white/5 px-2">
+        <div className="flex items-center bg-stone-50 border-b border-stone-200 px-2">
           {terminals.map(t => (
             <div
               key={t.id}
               className={`flex items-center gap-2 px-3 py-2 text-xs cursor-pointer border-b-2 transition-colors ${
-                activeId === t.id ? 'border-accent text-accent' : 'border-transparent text-gray-400 hover:text-gray-200'
+                activeId === t.id ? 'border-accent text-accent' : 'border-transparent text-stone-400 hover:text-stone-600'
               }`}
               onClick={() => setActiveId(t.id)}
             >
               <span>{t.title}</span>
               <button onClick={(e) => { e.stopPropagation(); handleClose(t.id) }}
-                className="p-0.5 rounded hover:bg-white/10 text-gray-500 hover:text-danger">
+                className="p-0.5 rounded hover:bg-stone-200 text-stone-400 hover:text-danger">
                 <X size={12} />
               </button>
             </div>
           ))}
           <button onClick={handleCreate}
-            className="p-1.5 ml-1 rounded hover:bg-white/5 text-gray-400 hover:text-white">
+            className="p-1.5 ml-1 rounded hover:bg-stone-200 text-stone-400 hover:text-stone-600">
             <Plus size={14} />
           </button>
         </div>
 
-        {/* Terminal area */}
-        <div className="h-[calc(100vh-220px)] bg-surface-0">
+        {/* Terminal area - stays dark */}
+        <div className="h-[calc(100vh-200px)] bg-[#1c1917]">
           {activeSession ? (
             <TerminalView key={activeSession.id} session={activeSession} />
           ) : (
-            <div className="flex items-center justify-center h-full text-gray-500">
+            <div className="flex items-center justify-center h-full text-stone-500">
               <button onClick={handleCreate}
-                className="flex items-center gap-2 px-4 py-2 bg-surface-2 rounded-lg hover:bg-surface-3 transition-colors">
+                className="flex items-center gap-2 px-4 py-2 bg-stone-800 text-stone-200 rounded-lg hover:bg-stone-700 transition-colors">
                 <Plus size={16} /> New Terminal
               </button>
             </div>
