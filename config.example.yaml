@@ -1,0 +1,44 @@
+server:
+  host: "127.0.0.1"
+  port: 8420
+
+slurm:
+  user: ""  # defaults to $USER
+  default_account: ""
+  default_partition: "gpu"
+  poll_interval_seconds: 30
+
+logs:
+  watch_paths:
+    - "/home/$USER/slurm_logs"
+    - "/scratch/gpfs/$GROUP/$USER"
+
+terminal:
+  max_terminals: 5
+  shell: "/bin/bash"
+
+database:
+  path: "data/tracker.db"
+
+notifications:
+  enabled: false
+  smtp_host: "localhost"
+  smtp_port: 25
+  from_address: ""
+  to_address: ""
+
+notion:
+  enabled: false
+  api_key: ""
+  database_id: ""
+
+google_calendar:
+  enabled: false
+  client_id: ""
+  client_secret: ""
+  refresh_token: ""
+  calendar_id: "primary"
+
+auth:
+  enabled: false
+  token: ""

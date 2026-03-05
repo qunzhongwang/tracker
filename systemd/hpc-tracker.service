@@ -1,0 +1,16 @@
+[Unit]
+Description=HPC Tracker Dashboard
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/workspace/tracker
+ExecStart=%h/.local/bin/uvicorn backend.main:app --host 127.0.0.1 --port 8420
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:%h/workspace/tracker/data/logs/tracker.log
+StandardError=append:%h/workspace/tracker/data/logs/tracker.log
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target
